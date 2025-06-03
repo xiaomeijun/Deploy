@@ -9,6 +9,7 @@ socket=/data/mysql/mysql.sock
 # MySQL服务端监听端口，默认是3306
 port = 3306
 default-time-zone = '+08:00'
+log_timestamps = SYSTEM
 
 # MySQL数据目录的路径，存储所有数据库文件
 datadir=/data/mysql
