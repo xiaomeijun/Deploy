@@ -82,6 +82,12 @@ done
 
 sysctl -p
 
+# 设置 swappiness 值为 10
+echo "vm.swappiness=10" | sudo tee -a /etc/sysctl.conf > /dev/null
+
+# 应用更改
+sysctl -p
+
 # Set environment variables
 echo -e "\033[34mConfiguring environment variables...\033[0m"
 if ! grep -q "FORMAT_MESSAGES_PATTERN_DISABLE_LOOKUPS" /etc/profile; then
