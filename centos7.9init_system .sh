@@ -25,7 +25,7 @@ yum install -y epel-release
 yum install -y net-tools lrzsz gcc gcc-c++ vim pcre pcre-devel openssl openssl-devel \
     automake autoconf bash-completion kernel-headers lvm2 wget zip htop unzip \
     readline-devel libtool libxml2 libxml2-devel zlib zlib-devel libcurl libcurl-devel \
-    libevent curl curl-devel nfs-utils git chrony
+    libevent curl curl-devel nfs-utils git chrony iotop
 
 # Configure Chrony for time synchronization
 echo -e "\033[34mConfiguring Chrony...\033[0m"
