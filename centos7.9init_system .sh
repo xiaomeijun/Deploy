@@ -94,6 +94,33 @@ if ! grep -q "FORMAT_MESSAGES_PATTERN_DISABLE_LOOKUPS" /etc/profile; then
     echo "export FORMAT_MESSAGES_PATTERN_DISABLE_LOOKUPS=true" >> /etc/profile
 fi
 
+# 删除旧的 NTP 服务器配置
+sed -i '/server 0.centos.pool.ntp.org iburst/d' /etc/chrony.conf
+sed -i '/server 1.centos.pool.ntp.org iburst/d' /etc/chrony.conf
+sed -i '/server 2.centos.pool.ntp.org iburst/d' /etc/chrony.conf
+sed -i '/server 3.centos.pool.ntp.org iburst/d' /etc/chrony.conf
+
+# 添加新的 NTP 服务器配置
+cat <<EOL >> /etc/chrony.conf
+
+# 使用阿里云的 NTP 服务器
+server time1.aliyun.com iburst
+server time2.aliyun.com iburst
+server time3.aliyun.com iburst
+
+# 使用东北大学的 NTP 服务器
+server time.neu.edu.cn iburst
+
+# 使用中国 NTP 池
+server cn.pool.ntp.org iburst
+EOL
+
+# 重启 chronyd 服务使配置生效
+systemctl restart chronyd
+
+# 显示当前 NTP 配置状态
+chronyc sources
+
 # Create data directory
 echo -e "\033[34mCreating data directory...\033[0m"
 mkdir -p /data
