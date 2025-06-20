@@ -12,6 +12,10 @@ socket=/data/mysql/mysql.sock
 port=3306
 pid-file=/var/run/mysqld/mysqld.pid
 
+default-time-zone = '+08:00'
+#log_timestamps = SYSTEM 会使得 MySQL 的所有日志文件（包括错误日志、查询日志等）使用系统时区。
+log_timestamps = SYSTEM
+
 # 最大连接数和连接超时设置
 max_connections=2000
 max_user_connections=2000
