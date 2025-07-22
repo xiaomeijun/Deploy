@@ -1,0 +1,57 @@
+Rook v1.15支持以下Ceph版本：
+
+Ceph Squid v19.2.0或更新版本
+Ceph Reef v18.2.0或更新版本
+Ceph Quincy v17.2.0或更新版本
+使用Rook 1.15部署和管理Ceph(Reef) 18.2.1。
+Rook 1.15支持Kubernetes从v1.26到v1.31版本
+
+kubectl label nodes node01 role=ceph
+kubectl label nodes node02 role=ceph
+kubectl label nodes node03 role=ceph
+
+
+git clone --single-branch --branch v1.15.7 https://github.com/rook/rook.git
+cd rook/cluster/examples/
+kubectl create -f crds.yaml
+kubectl create -f common.yaml
+kubectl create -f operator.yaml
+
+修改cluster.yaml
+
+  mon一直无法创建
+  network:
+    provider: host  #增加此处
+    connections:
+      encryption:
+        enabled: false
+      compression:
+        enabled: false
+      requireMsgr2: false
+    addressRanges:
+      public:#增加此处
+        - "192.168.1.0/24" #增加
+
+
+  storage: # cluster level storage configuration and selection
+    useAllNodes: false  #修改
+    useAllDevices: false  #修改
+    #deviceFilter:
+    config:
+    allowDeviceClassUpdate: false # whether to allow changing the device class of an OSD after it is created
+    allowOsdCrushWeightUpdate: false # whether to allow resizing the OSD crush weight after osd pvc is increased
+    #增加
+    nodes:
+      - name: "node01" #hostname
+        devices: # specific devices to use for storage can be specified for each node
+        - name: "sdb"  #/dev/sdb
+      - name: "node02"
+        devices: # specific devices to use for storage can be specified for each node
+        - name: "sdb"
+      - name: "node03"
+        devices: # specific devices to use for storage can be specified for each node
+        - name: "sdb"
+
+  kubectl create -f cluster.yaml
+
+          
