@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rook-ceph-mgr-dashboard-nodeport
+  namespace: rook-ceph
+spec:
+  ports:
+  - name: https-dashboard-new
+    port: 8443            # 新的端口号，外部访问时使用
+    protocol: TCP
+    targetPort: 8443      # 内部应用端口，保持不变
+    nodePort: 30001       # 新的 NodePort
+  selector:
+    app: rook-ceph-mgr
+    mgr_role: active
+    rook_cluster: rook-ceph
+  sessionAffinity: None
+  type: NodePort          # 类型设置为 NodePort
+
