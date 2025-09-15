@@ -1,0 +1,12 @@
+1、windows10关闭自带防病毒，解决HttpCanary无法关闭和启动抓取按钮
+
+2、https://www.bilibili.com/opus/979223758651785221?jump_opus=1
+
+3、https://www.bilibili.com/read/cv38988074/?jump_opus=1
+
+
+安卓设置-设置需要加入root-explorer httpcanary   
+#httpcanary不在 无法添加根证书至系统
+
+右下角bb   链接login/auto 点击进去保存
+重新打开最下方写入保存
