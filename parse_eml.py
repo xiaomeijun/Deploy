@@ -1,3 +1,4 @@
+# 79 80行 修改目录变量e:\mail 创建目录并将邮件存放该目录
 import os
 import csv
 import email
