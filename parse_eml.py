@@ -1,4 +1,5 @@
 # 79 80行 修改目录变量e:\mail 创建目录并将邮件存放该目录
+#编译成exe文件 pyinstaller --onefile parse_eml.py
 import os
 import csv
 import email
